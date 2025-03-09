@@ -1,0 +1,646 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Sprite Generator</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      max-width: 800px;
+      margin: 0 auto;
+      padding: 20px;
+      background: #f0f0f0;
+    }
+    canvas {
+      border: 1px solid #ccc;
+      margin: 10px 0;
+      background: #333;
+      width: 128px;
+      height: 128px;
+    }
+    .sprite-container {
+      margin-bottom: 30px;
+      padding: 10px;
+      background: white;
+      border-radius: 5px;
+    }
+    button {
+      padding: 10px 15px;
+      background-color: #4CAF50;
+      color: white;
+      border: none;
+      cursor: pointer;
+      margin-right: 10px;
+    }
+    h2 {
+      margin-top: 30px;
+    }
+  </style>
+</head>
+<body>
+  <h1>Sprite Generator for Berserk Survivors Game</h1>
+  <p>Click the buttons below to generate and download sprites for your game.</p>
+  
+  <h2>Player Sprite</h2>
+  <div class="sprite-container">
+    <canvas id="playerCanvas" width="128" height="128"></canvas><br>
+    <button onclick="drawPlayer()">Generate Player</button>
+    <button onclick="downloadSprite('playerCanvas', 'player.png')">Download Player Sprite</button>
+  </div>
+  
+  <h2>Enemy Sprites</h2>
+  <div class="sprite-container">
+    <canvas id="demon1Canvas" width="64" height="64"></canvas><br>
+    <button onclick="drawDemon1()">Generate Grunt Demon</button>
+    <button onclick="downloadSprite('demon1Canvas', 'demon1.png')">Download Grunt Sprite</button>
+  </div>
+  
+  <div class="sprite-container">
+    <canvas id="demon2Canvas" width="64" height="64"></canvas><br>
+    <button onclick="drawDemon2()">Generate Speeder Demon</button>
+    <button onclick="downloadSprite('demon2Canvas', 'demon2.png')">Download Speeder Sprite</button>
+  </div>
+  
+  <div class="sprite-container">
+    <canvas id="demon3Canvas" width="64" height="64"></canvas><br>
+    <button onclick="drawDemon3()">Generate Tank Demon</button>
+    <button onclick="downloadSprite('demon3Canvas', 'demon3.png')">Download Tank Sprite</button>
+  </div>
+  
+  <div class="sprite-container">
+    <canvas id="demon4Canvas" width="64" height="64"></canvas><br>
+    <button onclick="drawDemon4()">Generate Boss Demon</button>
+    <button onclick="downloadSprite('demon4Canvas', 'demon4.png')">Download Boss Sprite</button>
+  </div>
+  
+  <h2>Weapon Sprites</h2>
+  <div class="sprite-container">
+    <canvas id="swordCanvas" width="64" height="64"></canvas><br>
+    <button onclick="drawSword()">Generate Sword</button>
+    <button onclick="downloadSprite('swordCanvas', 'sword.png')">Download Sword Sprite</button>
+  </div>
+  
+  <div class="sprite-container">
+    <canvas id="knifeCanvas" width="64" height="64"></canvas><br>
+    <button onclick="drawKnife()">Generate Knife</button>
+    <button onclick="downloadSprite('knifeCanvas', 'knife.png')">Download Knife Sprite</button>
+  </div>
+  
+  <div class="sprite-container">
+    <canvas id="whipCanvas" width="64" height="64"></canvas><br>
+    <button onclick="drawWhip()">Generate Whip</button>
+    <button onclick="downloadSprite('whipCanvas', 'whip.png')">Download Whip Sprite</button>
+  </div>
+  
+  <div class="sprite-container">
+    <canvas id="orbCanvas" width="64" height="64"></canvas><br>
+    <button onclick="drawOrb()">Generate Orb</button>
+    <button onclick="downloadSprite('orbCanvas', 'orb.png')">Download Orb Sprite</button>
+  </div>
+  
+  <h2>Pickup Sprites</h2>
+  <div class="sprite-container">
+    <canvas id="healthCanvas" width="64" height="64"></canvas><br>
+    <button onclick="drawHealth()">Generate Health Pickup</button>
+    <button onclick="downloadSprite('healthCanvas', 'health.png')">Download Health Sprite</button>
+  </div>
+  
+  <div class="sprite-container">
+    <canvas id="expCanvas" width="64" height="64"></canvas><br>
+    <button onclick="drawExp()">Generate Experience Pickup</button>
+    <button onclick="downloadSprite('expCanvas', 'exp.png')">Download Exp Sprite</button>
+  </div>
+  
+  <h2>Generate All Sprites</h2>
+  <button onclick="generateAll()">Generate All Sprites</button>
+  
+  <script>
+    // Helper function to get canvas context
+    function getContext(canvasId) {
+      const canvas = document.getElementById(canvasId);
+      const ctx = canvas.getContext('2d');
+      ctx.imageSmoothingEnabled = false; // Keep pixel art sharp
+      return ctx;
+    }
+    
+    // Player sprite
+    function drawPlayer() {
+      console.log("Drawing player sprite...");
+      const ctx = getContext('playerCanvas');
+      ctx.clearRect(0, 0, 128, 128);
+      
+      // Scale up the sprite (6x)
+      ctx.scale(6, 6);
+      
+      // Colors from reference sprite
+      const colors = {
+        darkBrown: '#4A3421',    // Darkest brown for shadows
+        brown: '#705030',        // Main brown
+        lightBrown: '#A67C52',   // Light brown
+        highlight: '#C8A080',    // Highlights
+        black: '#000000',        // Outlines
+        skin: '#E8C098'         // Skin tone
+      };
+      
+      try {
+        console.log("Drawing character in dynamic side pose...");
+        
+        function drawPixel(x, y, color) {
+          ctx.fillStyle = color;
+          ctx.fillRect(x, y, 1, 1);
+        }
+
+        // Draw the sprite pixel by pixel
+        
+        // Legs
+        // Back leg (bent)
+        drawPixel(8, 16, colors.black);
+        drawPixel(9, 16, colors.brown);
+        drawPixel(10, 16, colors.black);
+        drawPixel(8, 17, colors.black);
+        drawPixel(9, 17, colors.brown);
+        drawPixel(10, 17, colors.black);
+        drawPixel(7, 18, colors.black);
+        drawPixel(8, 18, colors.brown);
+        drawPixel(9, 18, colors.black);
+        
+        // Front leg (straight)
+        drawPixel(12, 16, colors.black);
+        drawPixel(13, 16, colors.brown);
+        drawPixel(14, 16, colors.black);
+        drawPixel(12, 17, colors.black);
+        drawPixel(13, 17, colors.brown);
+        drawPixel(14, 17, colors.black);
+        drawPixel(12, 18, colors.black);
+        drawPixel(13, 18, colors.brown);
+        drawPixel(14, 18, colors.black);
+        
+        // Body
+        // Main torso
+        for(let y = 8; y <= 15; y++) {
+          // Left side
+          drawPixel(9, y, colors.black);
+          drawPixel(10, y, colors.brown);
+          // Middle
+          drawPixel(11, y, colors.brown);
+          drawPixel(12, y, colors.brown);
+          // Right side
+          drawPixel(13, y, colors.brown);
+          drawPixel(14, y, colors.black);
+        }
+        
+        // Armor details
+        // Chest plate
+        for(let y = 9; y <= 12; y++) {
+          drawPixel(10, y, colors.lightBrown);
+          drawPixel(13, y, colors.darkBrown);
+        }
+        
+        // Belt
+        drawPixel(10, 14, colors.highlight);
+        drawPixel(11, 14, colors.highlight);
+        drawPixel(12, 14, colors.highlight);
+        drawPixel(13, 14, colors.black);
+        
+        // Head
+        // Base shape
+        for(let y = 4; y <= 7; y++) {
+          drawPixel(11, y, colors.black);
+          drawPixel(12, y, colors.skin);
+          drawPixel(13, y, colors.skin);
+          drawPixel(14, y, colors.black);
+        }
+        
+        // Hair
+        drawPixel(11, 3, colors.black);
+        drawPixel(12, 3, colors.black);
+        drawPixel(13, 3, colors.black);
+        drawPixel(14, 3, colors.black);
+        drawPixel(15, 4, colors.black);
+        for(let x = 11; x <= 14; x++) {
+          drawPixel(x, 4, colors.darkBrown);
+        }
+        
+        // Face
+        drawPixel(13, 5, colors.black); // Eye
+        drawPixel(13, 6, colors.black); // Mouth
+        
+        // Arms
+        // Back arm
+        for(let y = 9; y <= 11; y++) {
+          drawPixel(8, y, colors.black);
+          drawPixel(9, y, colors.brown);
+          drawPixel(10, y, colors.black);
+        }
+        
+        // Front arm (raised slightly)
+        for(let y = 8; y <= 10; y++) {
+          drawPixel(14, y, colors.black);
+          drawPixel(15, y, colors.brown);
+          drawPixel(16, y, colors.black);
+        }
+        
+        // Armor highlights
+        // Shoulder plates
+        drawPixel(9, 8, colors.highlight);
+        drawPixel(15, 8, colors.highlight);
+        
+        // Chest details
+        drawPixel(11, 10, colors.lightBrown);
+        drawPixel(12, 10, colors.lightBrown);
+        drawPixel(11, 12, colors.darkBrown);
+        drawPixel(12, 12, colors.darkBrown);
+        
+        console.log("Character drawn successfully!");
+        
+        // Reset the scale
+        ctx.setTransform(1, 0, 0, 1, 0, 0);
+        
+      } catch (error) {
+        console.error("Error drawing character:", error);
+      }
+    }
+    
+    // Grunt demon sprite
+    function drawDemon1() {
+      const ctx = getContext('demon1Canvas');
+      ctx.clearRect(0, 0, 64, 64);
+      
+      // Body
+      ctx.fillStyle = '#FF0000';
+      ctx.beginPath();
+      ctx.arc(32, 32, 20, 0, Math.PI * 2);
+      ctx.fill();
+      
+      // Eyes
+      ctx.fillStyle = '#FFFFFF';
+      ctx.beginPath();
+      ctx.arc(24, 24, 6, 0, Math.PI * 2);
+      ctx.arc(40, 24, 6, 0, Math.PI * 2);
+      ctx.fill();
+      
+      // Pupils
+      ctx.fillStyle = '#000000';
+      ctx.beginPath();
+      ctx.arc(24, 24, 3, 0, Math.PI * 2);
+      ctx.arc(40, 24, 3, 0, Math.PI * 2);
+      ctx.fill();
+      
+      // Mouth
+      ctx.beginPath();
+      ctx.arc(32, 38, 10, 0, Math.PI);
+      ctx.stroke();
+      
+      // Horns
+      ctx.fillStyle = '#AA0000';
+      ctx.beginPath();
+      ctx.moveTo(20, 18);
+      ctx.lineTo(15, 5);
+      ctx.lineTo(25, 15);
+      ctx.fill();
+      
+      ctx.beginPath();
+      ctx.moveTo(44, 18);
+      ctx.lineTo(49, 5);
+      ctx.lineTo(39, 15);
+      ctx.fill();
+    }
+    
+    // Speeder demon sprite
+    function drawDemon2() {
+      const ctx = getContext('demon2Canvas');
+      ctx.clearRect(0, 0, 64, 64);
+      
+      // Body (triangle)
+      ctx.fillStyle = '#FF6600';
+      ctx.beginPath();
+      ctx.moveTo(32, 10);
+      ctx.lineTo(10, 50);
+      ctx.lineTo(54, 50);
+      ctx.closePath();
+      ctx.fill();
+      
+      // Eyes
+      ctx.fillStyle = '#FFFFFF';
+      ctx.beginPath();
+      ctx.arc(26, 30, 5, 0, Math.PI * 2);
+      ctx.arc(38, 30, 5, 0, Math.PI * 2);
+      ctx.fill();
+      
+      // Pupils
+      ctx.fillStyle = '#000000';
+      ctx.beginPath();
+      ctx.arc(26, 30, 2, 0, Math.PI * 2);
+      ctx.arc(38, 30, 2, 0, Math.PI * 2);
+      ctx.fill();
+      
+      // Mouth
+      ctx.beginPath();
+      ctx.moveTo(26, 40);
+      ctx.lineTo(38, 40);
+      ctx.stroke();
+    }
+    
+    // Tank demon sprite
+    function drawDemon3() {
+      const ctx = getContext('demon3Canvas');
+      ctx.clearRect(0, 0, 64, 64);
+      
+      // Body (square)
+      ctx.fillStyle = '#990000';
+      ctx.fillRect(12, 12, 40, 40);
+      
+      // Eyes
+      ctx.fillStyle = '#FFFFFF';
+      ctx.beginPath();
+      ctx.arc(24, 24, 6, 0, Math.PI * 2);
+      ctx.arc(40, 24, 6, 0, Math.PI * 2);
+      ctx.fill();
+      
+      // Pupils
+      ctx.fillStyle = '#000000';
+      ctx.beginPath();
+      ctx.arc(24, 24, 3, 0, Math.PI * 2);
+      ctx.arc(40, 24, 3, 0, Math.PI * 2);
+      ctx.fill();
+      
+      // Mouth (rectangle)
+      ctx.fillStyle = '#000000';
+      ctx.fillRect(22, 38, 20, 6);
+      
+      // Armor plates
+      ctx.strokeStyle = '#550000';
+      ctx.lineWidth = 2;
+      ctx.strokeRect(12, 12, 40, 40);
+      ctx.beginPath();
+      ctx.moveTo(12, 22);
+      ctx.lineTo(52, 22);
+      ctx.moveTo(12, 32);
+      ctx.lineTo(52, 32);
+      ctx.stroke();
+    }
+    
+    // Boss demon sprite
+    function drawDemon4() {
+      const ctx = getContext('demon4Canvas');
+      ctx.clearRect(0, 0, 64, 64);
+      
+      // Body (star)
+      ctx.fillStyle = '#660066';
+      ctx.beginPath();
+      
+      // Draw a 5-pointed star
+      for (let i = 0; i < 5; i++) {
+        const angle = (Math.PI * 2 * i / 5) - Math.PI / 2;
+        const x1 = 32 + 25 * Math.cos(angle);
+        const y1 = 32 + 25 * Math.sin(angle);
+        ctx.lineTo(x1, y1);
+        
+        const angleInner = angle + Math.PI / 5;
+        const x2 = 32 + 12 * Math.cos(angleInner);
+        const y2 = 32 + 12 * Math.sin(angleInner);
+        ctx.lineTo(x2, y2);
+      }
+      
+      ctx.closePath();
+      ctx.fill();
+      
+      // Eyes
+      ctx.fillStyle = '#FFFFFF';
+      ctx.beginPath();
+      ctx.arc(24, 28, 5, 0, Math.PI * 2);
+      ctx.arc(40, 28, 5, 0, Math.PI * 2);
+      ctx.fill();
+      
+      // Pupils (red)
+      ctx.fillStyle = '#FF0000';
+      ctx.beginPath();
+      ctx.arc(24, 28, 2, 0, Math.PI * 2);
+      ctx.arc(40, 28, 2, 0, Math.PI * 2);
+      ctx.fill();
+      
+      // Mouth
+      ctx.fillStyle = '#000000';
+      ctx.beginPath();
+      ctx.arc(32, 38, 8, 0, Math.PI);
+      ctx.fill();
+      
+      // Add some details
+      ctx.strokeStyle = '#440044';
+      ctx.lineWidth = 1;
+      ctx.beginPath();
+      ctx.arc(32, 32, 18, 0, Math.PI * 2);
+      ctx.stroke();
+    }
+    
+    // Sword sprite
+    function drawSword() {
+      const ctx = getContext('swordCanvas');
+      ctx.clearRect(0, 0, 64, 64);
+      
+      // Blade
+      ctx.fillStyle = '#CCCCCC';
+      ctx.beginPath();
+      ctx.moveTo(32, 5);
+      ctx.lineTo(36, 40);
+      ctx.lineTo(32, 50);
+      ctx.lineTo(28, 40);
+      ctx.closePath();
+      ctx.fill();
+      
+      // Handle
+      ctx.fillStyle = '#8B4513';
+      ctx.fillRect(28, 50, 8, 10);
+      
+      // Guard
+      ctx.fillStyle = '#DDDDDD';
+      ctx.fillRect(24, 45, 16, 5);
+      
+      // Highlight
+      ctx.strokeStyle = '#FFFFFF';
+      ctx.lineWidth = 1;
+      ctx.beginPath();
+      ctx.moveTo(30, 10);
+      ctx.lineTo(30, 40);
+      ctx.stroke();
+    }
+    
+    // Knife sprite
+    function drawKnife() {
+      const ctx = getContext('knifeCanvas');
+      ctx.clearRect(0, 0, 64, 64);
+      
+      // Blade
+      ctx.fillStyle = '#CCCCCC';
+      ctx.beginPath();
+      ctx.moveTo(15, 20);
+      ctx.lineTo(50, 32);
+      ctx.lineTo(15, 44);
+      ctx.lineTo(20, 32);
+      ctx.closePath();
+      ctx.fill();
+      
+      // Handle
+      ctx.fillStyle = '#8B4513';
+      ctx.fillRect(5, 28, 10, 8);
+      
+      // Highlight
+      ctx.strokeStyle = '#FFFFFF';
+      ctx.lineWidth = 1;
+      ctx.beginPath();
+      ctx.moveTo(15, 25);
+      ctx.lineTo(45, 32);
+      ctx.stroke();
+    }
+    
+    // Whip sprite
+    function drawWhip() {
+      const ctx = getContext('whipCanvas');
+      ctx.clearRect(0, 0, 64, 64);
+      
+      // Whip body (curved line)
+      ctx.strokeStyle = '#8B4513';
+      ctx.lineWidth = 3;
+      ctx.beginPath();
+      ctx.moveTo(10, 32);
+      ctx.bezierCurveTo(20, 10, 40, 10, 50, 32);
+      ctx.stroke();
+      
+      // Handle
+      ctx.fillStyle = '#8B4513';
+      ctx.fillRect(5, 28, 10, 8);
+      
+      // Whip end
+      ctx.fillStyle = '#AA7744';
+      ctx.beginPath();
+      ctx.arc(50, 32, 4, 0, Math.PI * 2);
+      ctx.fill();
+    }
+    
+    // Orb sprite
+    function drawOrb() {
+      const ctx = getContext('orbCanvas');
+      ctx.clearRect(0, 0, 64, 64);
+      
+      // Outer glow
+      const gradient = ctx.createRadialGradient(32, 32, 10, 32, 32, 25);
+      gradient.addColorStop(0, 'rgba(100, 100, 255, 1)');
+      gradient.addColorStop(1, 'rgba(100, 100, 255, 0)');
+      
+      ctx.fillStyle = gradient;
+      ctx.beginPath();
+      ctx.arc(32, 32, 25, 0, Math.PI * 2);
+      ctx.fill();
+      
+      // Inner orb
+      ctx.fillStyle = '#6666FF';
+      ctx.beginPath();
+      ctx.arc(32, 32, 10, 0, Math.PI * 2);
+      ctx.fill();
+      
+      // Highlight
+      ctx.fillStyle = '#FFFFFF';
+      ctx.beginPath();
+      ctx.arc(28, 28, 4, 0, Math.PI * 2);
+      ctx.fill();
+    }
+    
+    // Health pickup sprite
+    function drawHealth() {
+      const ctx = getContext('healthCanvas');
+      ctx.clearRect(0, 0, 64, 64);
+      
+      // Green cross
+      ctx.fillStyle = '#00CC00';
+      
+      // Horizontal bar
+      ctx.fillRect(12, 24, 40, 16);
+      
+      // Vertical bar
+      ctx.fillRect(24, 12, 16, 40);
+      
+      // White outline
+      ctx.strokeStyle = '#FFFFFF';
+      ctx.lineWidth = 2;
+      ctx.strokeRect(12, 24, 40, 16);
+      ctx.strokeRect(24, 12, 16, 40);
+      
+      // Glow effect
+      ctx.strokeStyle = 'rgba(0, 255, 0, 0.5)';
+      ctx.lineWidth = 4;
+      ctx.strokeRect(10, 22, 44, 20);
+      ctx.strokeRect(22, 10, 20, 44);
+    }
+    
+    // Experience pickup sprite
+    function drawExp() {
+      const ctx = getContext('expCanvas');
+      ctx.clearRect(0, 0, 64, 64);
+      
+      // Blue gem
+      ctx.fillStyle = '#0088FF';
+      ctx.beginPath();
+      ctx.moveTo(32, 10);
+      ctx.lineTo(50, 25);
+      ctx.lineTo(42, 50);
+      ctx.lineTo(22, 50);
+      ctx.lineTo(14, 25);
+      ctx.closePath();
+      ctx.fill();
+      
+      // Highlight
+      ctx.fillStyle = '#AADDFF';
+      ctx.beginPath();
+      ctx.moveTo(32, 15);
+      ctx.lineTo(40, 25);
+      ctx.lineTo(32, 45);
+      ctx.lineTo(24, 25);
+      ctx.closePath();
+      ctx.fill();
+      
+      // Outline
+      ctx.strokeStyle = '#0044AA';
+      ctx.lineWidth = 2;
+      ctx.beginPath();
+      ctx.moveTo(32, 10);
+      ctx.lineTo(50, 25);
+      ctx.lineTo(42, 50);
+      ctx.lineTo(22, 50);
+      ctx.lineTo(14, 25);
+      ctx.closePath();
+      ctx.stroke();
+    }
+    
+    // Function to download a sprite
+    function downloadSprite(canvasId, filename) {
+      const canvas = document.getElementById(canvasId);
+      const link = document.createElement('a');
+      link.download = filename;
+      link.href = canvas.toDataURL('image/png');
+      link.click();
+    }
+    
+    // Generate all sprites at once
+    function generateAll() {
+      drawPlayer();
+      drawDemon1();
+      drawDemon2();
+      drawDemon3();
+      drawDemon4();
+      drawSword();
+      drawKnife();
+      drawWhip();
+      drawOrb();
+      drawHealth();
+      drawExp();
+    }
+    
+    // Generate all sprites when the page loads
+    window.onload = function() {
+      console.log("Page loaded, generating sprites...");
+      generateAll();
+    };
+  </script>
+</body>
+</html> 

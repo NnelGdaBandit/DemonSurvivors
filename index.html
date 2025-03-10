@@ -7,6 +7,9 @@
   <script src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/1.4.0/p5.js"></script>
   <link rel="stylesheet" href="style.css">
   <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+  <!-- Google AdSense - Replace YOUR-CLIENT-ID below with your actual client ID from AdSense -->
+  <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-2640826095416627"
+     crossorigin="anonymous"></script>
   <script>
     // Make supabase available globally
     window.supabase = supabase;
@@ -15,6 +18,41 @@
   <script src="game.js"></script>
 </head>
 <body>
-  <div id="game-container"></div>
+  <div class="page-container">
+    <!-- Left ad space - Replace LEFT-AD-SLOT with the slot ID for your left sidebar ad unit -->
+    <div class="ad-container ad-left">
+      <ins class="adsbygoogle"
+           style="display:block"
+           data-ad-client="ca-pub-2640826095416627"
+           data-ad-slot="2379709188"
+           data-ad-format="vertical"></ins>
+    </div>
+
+    <!-- Game container -->
+    <div id="game-container"></div>
+
+    <!-- Right ad space - Replace RIGHT-AD-SLOT with the slot ID for your right sidebar ad unit -->
+    <div class="ad-container ad-right">
+      <ins class="adsbygoogle"
+           style="display:block"
+           data-ad-client="ca-pub-2640826095416627"
+           data-ad-slot="9934733757"
+           data-ad-format="vertical"></ins>
+    </div>
+  </div>
+
+  <!-- Bottom ad space - Replace BOTTOM-AD-SLOT with the slot ID for your bottom banner ad unit -->
+  <div class="ad-container ad-bottom">
+    <ins class="adsbygoogle"
+         style="display:block"
+         data-ad-client="ca-pub-2640826095416627"
+         data-ad-slot="6946711986"
+         data-ad-format="horizontal"></ins>
+  </div>
+
+  <script>
+    // Initialize all ad units
+    (adsbygoogle = window.adsbygoogle || []).push({});
+  </script>
 </body>
 </html>

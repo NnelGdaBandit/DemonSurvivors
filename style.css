@@ -1,60 +1,18 @@
 body {
   margin: 0;
-  padding: 20px;
-  display: flex;
-  flex-direction: column;
-  min-height: 100vh;
-  background-color: #1a1a1a;
-}
-
-.page-container {
-  display: flex;
-  justify-content: center;
-  align-items: flex-start;
-  gap: 20px;
-  flex: 1;
-}
-
-#game-container {
-  position: relative;
-}
-
-/* Ad container styles */
-.ad-container {
-  background: rgba(0, 0, 0, 0.2);
-  border: 1px solid rgba(255, 255, 255, 0.1);
-  border-radius: 4px;
-  padding: 10px;
+  padding: 0;
   display: flex;
   justify-content: center;
   align-items: center;
+  height: 100vh;
+  background-color: #111;
+  overflow: hidden;
 }
 
-.ad-left, .ad-right {
-  width: 160px;
-  height: 600px;
-}
-
-.ad-bottom {
-  margin-top: 20px;
-  width: 728px;
-  height: 90px;
-  margin-left: auto;
-  margin-right: auto;
-}
-
-/* Responsive adjustments */
-@media (max-width: 1200px) {
-  .ad-left, .ad-right {
-    display: none;
-  }
-}
-
-@media (max-width: 800px) {
-  .ad-bottom {
-    width: 320px;
-    height: 100px;
-  }
+#game-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 
 canvas {
